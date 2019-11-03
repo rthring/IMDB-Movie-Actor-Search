@@ -14,10 +14,17 @@
 
 int main (int argc, char *argv[])
 {
-	struct name_basics *test;
+	struct array *test;
+	int i;
 	if (argc != 2)
 	{
 		printf("You entered the wrong amount of arguments \n");
 	}
 	test = get_name(argv[1]);
+	for (i = 0; i < test->nelements; i++) {
+		free(((test->arr) + i)->nconst);
+		free(((test->arr) + i)->primaryName);
+	}
+	free(test->arr);
+	free(test);
 }
