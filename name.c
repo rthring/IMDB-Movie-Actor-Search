@@ -1,3 +1,9 @@
+/*
+ * Name:  Ryan Thring
+ * Student ID:  1058718
+ * e-mail: rthring@uoguelph.ca
+ */
+
 #include "name.h"
 #include "common.h"
 #include <stdio.h>
@@ -7,10 +13,10 @@
 struct name_array *get_name(char *directory)
 {
 	char *p;
-	char q[2048];
-	char r[2048];
+	char q[1001];
+	char r[1001];
 	char *value;
-	struct array *name_array;
+	struct name_array *array;
 	struct name_basics *info;
 	FILE *fp;
 	int actors = 0;
@@ -26,10 +32,10 @@ struct name_array *get_name(char *directory)
 			actors++;
 		}
 	}
-	name_array = malloc(sizeof(struct array));
+	array = malloc(sizeof(struct name_array));
 	info = malloc(actors * sizeof(struct name_basics));
-	name_array->nelements = actors;
-	name_array->arr = info;
+	array->nelements = actors;
+	array->arr = info;
 	fseek(fp, 0, SEEK_SET);
 	fgets(q, 1000, fp);
 	while (fgets(q, 1000, fp) != NULL) {
@@ -49,5 +55,5 @@ struct name_array *get_name(char *directory)
 	printf("Actors: %d, Counted actors: %d \n", actors, i);
 	fclose(fp);
 	free(p);
-	return name_array;
+	return array;
 }

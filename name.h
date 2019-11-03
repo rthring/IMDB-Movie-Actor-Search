@@ -1,4 +1,10 @@
-struct array
+/*
+ * Name:  Ryan Thring
+ * Student ID:  1058718
+ * e-mail: rthring@uoguelph.ca
+ */
+
+struct name_array
 {
 	struct name_basics *arr;
 	int nelements;
