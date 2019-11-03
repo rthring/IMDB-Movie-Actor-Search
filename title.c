@@ -38,6 +38,8 @@ struct title_array *get_title(char *directory)
 	info = malloc(movies * sizeof(struct title_basics));
 	array->nelements = movies;
 	array->arr = info;
+	array->tconst_root = NULL;
+	array->title_root = NULL;
 	fseek(fp, 0, SEEK_SET);
 	fgets(q, 1000, fp);
 	while (fgets(q, 1000, fp) != NULL) {
@@ -48,7 +50,7 @@ struct title_array *get_title(char *directory)
 			value = malloc (strlen(type) + 1);
 			value = strcpy(value, type);
 			(info + i)->tconst = value;
-			get_column(q, type, 2);
+			get_column(q, type, 3);
 			value = malloc (strlen(type) + 1);
 			value = strcpy(value, type);
 			(info + i)->primaryTitle = value;

@@ -38,11 +38,21 @@ struct tree *find_node (struct tree *root, char *value) {
 	}
 }
 
-void free_nodes (struct tree *root) {
+void free_normal_nodes (struct tree *root) {
 	if (root != NULL)
 	{
-		free_nodes(root->left);
-		free_nodes(root->right);
+		free_normal_nodes(root->left);
+		free_normal_nodes(root->right);
+		free(root);
+	}
+}
+
+void free_reverse_nodes (struct tree *root) {
+	if (root != NULL)
+	{
+		free_reverse_nodes(root->left);
+		free_reverse_nodes(root->right);
+		free(root->value);
 		free(root);
 	}
 }

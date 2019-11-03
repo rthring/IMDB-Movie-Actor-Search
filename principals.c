@@ -37,6 +37,8 @@ struct principals_array *get_principals(char *directory)
 	info = malloc(principals * sizeof(struct title_principals));
 	array->nelements = principals;
 	array->arr = info;
+	array->tconst_root = NULL;
+	array->nconst_root = NULL;
 	fseek(fp, 0, SEEK_SET);
 	fgets(q, 1000, fp);
 	while (fgets(q, 1000, fp) != NULL) {

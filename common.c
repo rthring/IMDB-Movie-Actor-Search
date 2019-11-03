@@ -39,14 +39,16 @@ void get_column (char *line, char *dest, int column) {
 
 char *reverse (char *string) {
 	char temp;
-	int last = strlen(string) - 1;
+	int end = strlen(string) - 1;
 	int start = 0;
-	char *reversed = malloc(i + 2);
+	char *reversed = malloc(end + 2);
 	strcpy(reversed, string);
-	while (start < last) {
+	while (start < end) {
 		temp = reversed[start];
 		reversed[start] = reversed[end];
 		reversed[end] = temp;
+		start++;
+		end--;
 	}
 	return reversed;
 }

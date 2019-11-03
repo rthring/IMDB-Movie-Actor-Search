@@ -5,3 +5,4 @@
  */
  
  void get_column (char *line, char *dest, int column);
+ char *reverse (char *string);

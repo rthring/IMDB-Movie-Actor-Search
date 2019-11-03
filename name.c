@@ -36,6 +36,8 @@ struct name_array *get_name(char *directory)
 	info = malloc(actors * sizeof(struct name_basics));
 	array->nelements = actors;
 	array->arr = info;
+	array->nconst_root = NULL;
+	array->name_root = NULL;
 	fseek(fp, 0, SEEK_SET);
 	fgets(q, 1000, fp);
 	while (fgets(q, 1000, fp) != NULL) {
