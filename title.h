@@ -8,6 +8,8 @@
 {
 	struct title_basics *arr;
 	int nelements;
+	struct tree *tconst_root;
+	struct tree *title_root;
 };
 
 struct title_basics {

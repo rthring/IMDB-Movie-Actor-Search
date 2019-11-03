@@ -14,6 +14,8 @@ struct title_principals {
 	char *tconst;
 	char *nconst;
 	char *characters;
+	struct tree *tconst_root;
+	struct tree *nconst_root;
 };
 
 struct principals_array *get_principals(char []);

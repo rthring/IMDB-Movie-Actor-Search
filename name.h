@@ -8,6 +8,8 @@ struct name_array
 {
 	struct name_basics *arr;
 	int nelements;
+	struct tree *nconst_root;
+	struct tree *name_root;
 };
 
 struct name_basics {

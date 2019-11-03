@@ -1,4 +1,13 @@
+/*
+ * Name:  Ryan Thring
+ * Student ID:  1058718
+ * e-mail: rthring@uoguelph.ca
+ */
+ 
 #include "common.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 void get_column (char *line, char *dest, int column) {
 	int start;
@@ -26,4 +35,18 @@ void get_column (char *line, char *dest, int column) {
 		strncpy(dest, (line + start), end - start);
 		dest[end - start] = '\0';
 	}
+}
+
+char *reverse (char *string) {
+	char temp;
+	int last = strlen(string) - 1;
+	int start = 0;
+	char *reversed = malloc(i + 2);
+	strcpy(reversed, string);
+	while (start < last) {
+		temp = reversed[start];
+		reversed[start] = reversed[end];
+		reversed[end] = temp;
+	}
+	return reversed;
 }
