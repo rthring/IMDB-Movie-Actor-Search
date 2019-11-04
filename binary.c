@@ -28,10 +28,15 @@ struct tree *add_node (struct tree *root, char *value, void *element) {
 }
 
 struct tree *find_node (struct tree *root, char *value) {
-	int i = strcmp(value, root->value);
-	if ((root == NULL) || (i == 0)) {
+	int i;
+	if (root == NULL) {
 		return root;
-	} else if (i < 0) {
+	}
+	i = strcmp(value, root->value);
+	if (i == 0) {
+		return root;
+	}
+	else if (i < 0) {
 		return find_node(root->left, value);
 	} else {
 		return find_node(root->right, value);

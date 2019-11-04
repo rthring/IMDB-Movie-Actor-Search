@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "binary.h"
 #include "common.h"
 #include "title.h"
@@ -133,35 +134,87 @@ int main (int argc, char *argv[])
 	struct title_array *title_basics;
 	struct principals_array *title_principals;
 	struct tree *root;
+	struct tree *root_two;
+	struct tree *root_three;
+	char input[1024];
+	char inputTest[1024];
+	char *actual_input;
+	char *command;
+	int end;
 	int i;
-	if (argc != 2)
-	{
-		printf("You entered the wrong amount of arguments \n");
-	}
+	int exit_outer = 0;
+	int exit_inner = 0;
+	int break_flag = 0;
+	int name = 0;;
 	
 	name_basics = get_name(argv[1]);
 	title_basics = get_title(argv[1]); 
 	title_principals = get_principals(argv[1]);
-	
 	name_basics->name_root = build_pnindex(name_basics);
 	name_basics->nconst_root = build_nindex(name_basics);
-	
 	title_basics->title_root = build_ptindex(title_basics);
 	title_basics->tconst_root = build_tindex(title_basics);
-	
 	title_principals->tconst_root = build_tindex_tp(title_principals);
 	title_principals->nconst_root = build_nindex_tp(title_principals);
-	root = title_principals->nconst_root;
 	
-	printf("\n Ready \n");
-	root = find_primary_title(title_basics, "Blade Runner");
-	printf("\n 1 \n");
-	printf("\n %s \n", ((struct title_basics *) root->data)->tconst);
-	root = find_tconst_tp(title_principals, ((struct title_basics *) root->data)->tconst);
-	printf("\n 2 \n");
-	root = find_nconst(name_basics, ((struct title_principals *) root->data)->nconst);
-	printf("\n 3 \n");
-	printf("\n Name %s \n", ((struct name_basics *)root->data)->primaryName);
+	while (exit_outer == 0) {
+		end = -1;
+		i = 0;
+		command = NULL;
+		actual_input = NULL;
+		root = NULL;
+		printf("> ");
+		fgets(input, 1024, stdin);
+		while (command == NULL) {
+			if (input[i] != ' ') {
+				command = input + i;
+			}
+			i++;
+		}
+		i = strlen(input) - 1;
+		while (end == -1) {
+			if (input[i] != ' ') {
+				end = i - 1;
+			}
+			i--;
+		}
+		input[end + 1] = '\0';
+		if (strncmp(command, "title", 5) == 0) {
+			actual_input = command + 5;
+			while (*actual_input == ' ') {
+				actual_input = actual_input + 1;
+			}
+			root = find_primary_title(title_basics, actual_input);
+			if (root != NULL) {
+				root_two = find_tconst_tp(title_principals, ((struct title_basics *) root->data)->tconst);
+				while (root_two != NULL) {
+					root_three = find_nconst(name_basics, ((struct title_principals *) root_two->data)->nconst);
+					if (root_three != NULL) {
+						printf("%s : %s\n", ((struct name_basics *)root_three->data)->primaryName, ((struct title_principals *)root_two->data)->characters);
+					}
+					root_two = root_two->right;
+					root_two = find_node(root_two, reverse(((struct title_basics *) root->data)->tconst));;
+				}
+			}
+		} else if (strncmp(command, "name", 4) == 0) {
+			actual_input = command + 4;
+			while (*actual_input == ' ') {
+				actual_input = actual_input + 1;
+			}
+			root = find_primary_name(name_basics, actual_input);
+			if (root != NULL) {
+				root_two = find_nconst_tp(title_principals, ((struct name_basics *) root->data)->nconst);
+				while (root_two != NULL) {
+					root_three = find_tconst(title_basics, ((struct title_principals *) root_two->data)->tconst);
+					if (root_three != NULL) {
+						printf("%s : %s\n", ((struct title_basics *)root_three->data)->primaryTitle, ((struct title_principals*)root_two->data)->characters);
+					}
+					root_two = root_two->right;
+					root_two = find_node(root_two, reverse(((struct name_basics *) root->data)->nconst));
+				}
+			}
+		}
+	}
 	
 	free_normal_nodes(name_basics->name_root);
 	free_reverse_nodes(name_basics->nconst_root);

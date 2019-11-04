@@ -43,7 +43,7 @@ struct principals_array *get_principals(char *directory)
 	fgets(q, 1000, fp);
 	while (fgets(q, 1000, fp) != NULL) {
 		get_column(q, category, 4);
-		if ((strstr(category, "actor")) || (strstr(category, "actor"))) {
+		if ((strstr(category, "actor")) || (strstr(category, "actress"))) {
 			get_column(q, category, 1);
 			value = malloc (strlen(category) + 1);
 			value = strcpy(value, category);
@@ -59,7 +59,6 @@ struct principals_array *get_principals(char *directory)
 			i++;
 		}
 	}
-	printf("Principals: %d, Counted principals: %d \n", principals, i);
 	fclose(fp);
 	free(p);
 	return array;

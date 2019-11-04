@@ -57,7 +57,6 @@ struct title_array *get_title(char *directory)
 			i++;
 		}
 	}
-	printf("Movies: %d, Counted movies: %d \n", movies, i);
 	fclose(fp);
 	free(p);
 	return array;

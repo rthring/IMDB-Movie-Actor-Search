@@ -54,7 +54,6 @@ struct name_array *get_name(char *directory)
 			i++;
 		}
 	}
-	printf("Actors: %d, Counted actors: %d \n", actors, i);
 	fclose(fp);
 	free(p);
 	return array;
