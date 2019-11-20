@@ -15,7 +15,6 @@ struct principals_array *get_principals(char *directory)
 	char *p;
 	char q[1001];
 	char category[1001];
-	char adult[1001];
 	char *value;
 	struct principals_array *array;
 	struct title_principals *info;
@@ -29,7 +28,7 @@ struct principals_array *get_principals(char *directory)
 	fgets(q, 1000, fp);
 	while (fgets(q, 1000, fp) != NULL) {
 		get_column(q, category, 4);
-		if ((strstr(category, "actor")) || (strstr(category, "actor"))) {
+		if ((strstr(category, "actor")) || (strstr(category, "actress"))) {
 			principals++;
 		}
 	}

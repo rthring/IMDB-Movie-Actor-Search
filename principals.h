@@ -8,14 +8,14 @@ struct principals_array
 {
 	struct title_principals *arr;
 	int nelements;
+	struct tree *tconst_root;
+	struct tree *nconst_root;
 };
 
 struct title_principals {
 	char *tconst;
 	char *nconst;
 	char *characters;
-	struct tree *tconst_root;
-	struct tree *nconst_root;
 };
 
 struct principals_array *get_principals(char []);

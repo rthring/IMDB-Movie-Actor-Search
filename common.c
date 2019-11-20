@@ -10,10 +10,10 @@
 #include <string.h>
 
 void get_column (char *line, char *dest, int column) {
-	int start;
 	int i = 0;
 	int tabCount = 0;
 	int end = -1;
+	int start = -1;
 	if (column == 1) {
 		start = 0;
 	}
@@ -29,9 +29,11 @@ void get_column (char *line, char *dest, int column) {
 		}
 		i++;
 	}
-	if (line[i] == '\0') {
+	if ((end == -1) && (start == -1)) {
 		strcpy(dest, "\0");
-	} else {
+	}
+	else {
+		end = i - 1;
 		strncpy(dest, (line + start), end - start);
 		dest[end - start] = '\0';
 	}

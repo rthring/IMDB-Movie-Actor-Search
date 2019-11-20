@@ -137,15 +137,11 @@ int main (int argc, char *argv[])
 	struct tree *root_two;
 	struct tree *root_three;
 	char input[1024];
-	char inputTest[1024];
 	char *actual_input;
 	char *command;
 	int end;
 	int i;
 	int exit_outer = 0;
-	int exit_inner = 0;
-	int break_flag = 0;
-	int name = 0;;
 	
 	name_basics = get_name(argv[1]);
 	title_basics = get_title(argv[1]); 
@@ -193,7 +189,7 @@ int main (int argc, char *argv[])
 						printf("%s : %s\n", ((struct name_basics *)root_three->data)->primaryName, ((struct title_principals *)root_two->data)->characters);
 					}
 					root_two = root_two->right;
-					root_two = find_node(root_two, reverse(((struct title_basics *) root->data)->tconst));;
+					root_two = find_node(root_two, reverse(((struct title_basics *) root->data)->tconst));
 				}
 			}
 		} else if (strncmp(command, "name", 4) == 0) {
